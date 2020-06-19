@@ -12,8 +12,10 @@ ship_scale = [int(WIDTH * 0.05), int(HEIGHT * 0.05)]
 laser_scale = [int(WIDTH * 0.05), int(HEIGHT * 0.05)]
 
 # Canvas for the game
+pygame.display.set_icon(pygame.image.load("./graphics/blueship.png"))
 CANVAS = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Space shooter")
+
 BG = pygame.transform.scale(
     pygame.image.load("./graphics/background.png"), (WIDTH, HEIGHT)
 )
@@ -163,7 +165,7 @@ class Player(Ship):
             (
                 self.x,
                 self.y + self.ship_img.get_height() + 5,
-                self.ship_img.get_width() * (self.health / self.max_health),
+                int(self.ship_img.get_width() * (self.health / self.max_health)),
                 10,
             ),
         )
@@ -241,19 +243,19 @@ def main():
         if lost:
             lost_label = lost_font.render("Game Over", 1, (213, 16, 129))
             CANVAS.blit(
-                lost_label, (WIDTH / 2 - lost_label.get_width() / 2, HEIGHT / 2)
+                lost_label, (int(WIDTH / 2 - lost_label.get_width() / 2), int(HEIGHT / 2))
             )
 
         if lostlife > 0:
             lives_lostlbl = lives_font.render("A life was lost", 1, (200, 50, 50))
-            CANVAS.blit(lives_lostlbl, (WIDTH / 2 - lives_lostlbl.get_width() / 2, 30))
+            CANVAS.blit(lives_lostlbl, (int(WIDTH / 2 - lives_lostlbl.get_width() / 2), 30))
 
         if gainedlife > 0:
             lives_gainedlbl = lives_font.render(
                 "A life was given for new level", 1, (50, 200, 50)
             )
             CANVAS.blit(
-                lives_gainedlbl, (WIDTH / 2 - lives_gainedlbl.get_width() / 2, 50)
+                lives_gainedlbl, (int(WIDTH / 2 - lives_gainedlbl.get_width() / 2), 50)
             )
 
         pygame.display.update()
@@ -347,7 +349,7 @@ def main_menu():
         title_label = title_font.render(
             "Press mousebutton to begin...", 1, (255, 255, 255)
         )
-        CANVAS.blit(title_label, (WIDTH / 2 - title_label.get_width() / 2, HEIGHT / 2))
+        CANVAS.blit(title_label, (int(WIDTH / 2 - title_label.get_width() / 2), int(HEIGHT / 2)))
 
         pygame.display.update()
         for event in pygame.event.get():
